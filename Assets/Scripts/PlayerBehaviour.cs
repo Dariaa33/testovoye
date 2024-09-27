@@ -10,6 +10,8 @@ public class PlayerBehaviour : MonoBehaviour
     public float movementSpeed = 5f;
     public int monedasCogidas = 0;
     public TextMeshProUGUI coinsText;
+    public AudioClip coinSFX;
+    public AudioClip specialSFX;
 
     // Start is called before the first frame update
     void Start()
@@ -45,12 +47,14 @@ public class PlayerBehaviour : MonoBehaviour
         {
             monedasCogidas += 5; //monedasCogidas = monedasCogidas + 5;
             Debug.Log(gameObject.name + " Ha cogido " + monedasCogidas + " moneda especial");
-           
+            AudioSource.PlayClipAtPoint(specialSFX, transform.position);
+
         }
         if (other.tag.Contains("Coin"))
         {
             coinsText.text = monedasCogidas.ToString();
             other.gameObject.SetActive(false);
+            AudioSource.PlayClipAtPoint(coinSFX, transform.position);
         }
        
 
